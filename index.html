@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6fc;
+            margin: 20px;
+        }
+        .container {
+            background-color: white;
+            max-width: 450px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #d8e1ee;
+        }
+        h1 {
+            text-align: center;
+            color: #34495e;
+        }
+        label {
+            display: block;
+            margin-top: 12px;
+        }
+        input {
+            width: 95%;
+            padding: 9px;
+            margin-top: 5px;
+            border: 1px solid #bbb;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 16px;
+            margin-top: 18px;
+            background-color: #cce5df;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #b6dcd2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Registration</h1>
+        <form onsubmit="return validateForm()">
+            <label>Name:</label>
+            <input type="text" id="name">
+
+            <label>Email:</label>
+            <input type="text" id="email">
+
+            <label>Mobile Number:</label>
+            <input type="text" id="mobile">
+
+            <label>Username:</label>
+            <input type="text" id="username">
+
+            <label>Password:</label>
+            <input type="password" id="password">
+
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var mobile = document.getElementById("mobile").value;
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            var namePattern = /^[A-Za-z ]+$/;
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            var mobilePattern = /^[0-9]{10}$/;
+            var passwordPattern =
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$/;
+
+            if (name == "") {
+                alert("Name cannot be empty.");
+                return false;
+            }
+
+            if (!namePattern.test(name)) {
+                alert("Name must contain only letters and spaces.");
+                return false;
+            }
+
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            if (!mobilePattern.test(mobile)) {
+                alert("Mobile number must contain exactly 10 digits.");
+                return false;
+            }
+
+            if (username == "") {
+                alert("Username cannot be empty.");
+                return false;
+            }
+
+            if (!passwordPattern.test(password)) {
+                alert("Password must have at least 8 characters, including uppercase, lowercase, a digit, and a special character.");
+                return false;
+            }
+
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</body>
+</html>
